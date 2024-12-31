@@ -1,6 +1,7 @@
 
 ## BankStatementAnalysing
 
+## Phần 1: Yêu cầu phần mềm
 # Chức năng chính của hệ thống:
 
 1. **Tải dữ liệu**: Người dùng có thể tải lên các file sao kê giao dịch ngân hàng (CSV, Excel, hoặc các định dạng khác).
@@ -66,4 +67,22 @@ Người dùng tải lên file sao kê giao dịch, hệ thống phân tích d�
 
 - Hệ thống phải có khả năng xử lý phân tích một tệp sao kê ngân hàng có kích thước 100MB trong thời gian không quá 5 phút.
 
+---
+## Phần 2: Thiết kế và cài đặt
+
+## Vấn đề 1: Sự phụ thuộc mạnh giữa `BankStatement` và `TransactionParser`
+
+### Mô tả:
+`BankStatement` đang sử dụng trực tiếp `TransactionParser` thông qua phương thức `parseFile()`. Điều này vi phạm nguyên tắc thiết kế **Dependency Inversion Principle (DIP)** vì `BankStatement` phụ thuộc vào cách thức cụ thể mà `TransactionParser` thực hiện việc phân tích tệp. Điều này làm giảm tính linh hoạt của hệ thống, vì mỗi lần có sự thay đổi trong cách thức phân tích tệp, `BankStatement` cũng cần phải thay đổi.
+
+## Vấn đề 2: `Transaction` chịu trách nhiệm quá nhiều (God Class)
+
+### Mô tả:
+Lớp `Transaction` hiện đang gánh quá nhiều trách nhiệm, bao gồm việc xử lý loại giao dịch (phân loại giao dịch - `categorize`) và kiểm tra tính hợp lệ của giao dịch (kiểm tra tính hợp lệ - `isValid`). Điều này vi phạm nguyên tắc **Single Responsibility Principle (SRP)**, vì mỗi lớp chỉ nên có một lý do để thay đổi. Việc để một lớp đảm nhiệm nhiều trách nhiệm làm cho lớp đó trở nên khó bảo trì và mở rộng.
+
+
+## Vấn đề 3: `StatementAnalyzer` có thể thiếu tính mở rộng
+
+### Mô tả:
+`StatementAnalyzer` hiện đang sử dụng danh sách `TransactionParser`, nhưng không chỉ rõ cách thức nó chọn parser phù hợp để phân tích tệp (ví dụ: CSV, PDF). Điều này có thể gây ra vấn đề khi hệ thống cần mở rộng để hỗ trợ thêm các định dạng tệp mới. Nếu không có cơ chế để chọn parser phù hợp, việc thêm hỗ trợ cho các định dạng mới sẽ trở nên phức tạp và làm giảm tính linh hoạt của hệ thống.
 
