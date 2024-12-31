@@ -1,1 +1,65 @@
 
+## BankStatementAnalysing
+
+# Chức năng chính của hệ thống:
+
+1. **Tải dữ liệu**: Người dùng có thể tải lên các file sao kê giao dịch ngân hàng (CSV, Excel, hoặc các định dạng khác).
+
+2. **Phân tích dữ liệu**: Hệ thống phân tích các giao dịch trong file, tính toán các chỉ số như tổng số tiền, số giao dịch, số tiền thu/chi, và số dư cuối kỳ,...
+
+3. **Xuất kết quả**: Lưu kết quả phân tích vào thiết bị lưu trữ dưới dạng file (PDF, CSV, hoặc Excel).
+
+---
+
+# Tác nhân liên quan đến hệ thống:
+
+- **Khách hàng**: Người sử dụng hệ thống để tải lên và phân tích dữ liệu giao dịch.
+- **Hệ thống Ngân hàng**: Cung cấp các file sao kê giao dịch cho khách hàng.
+
+
+---
+
+UseCase Diagram
+![markdown](https://www.planttext.com/plantuml/png/T991JWCn303lVeMrztu15LRm04hFoCgQ4f5DgjYHA5LVne4dyGMKj5asPJdQux5i9z-VNsjHYff61uvV53LWjBjNnS56Dcg31o2Z8MBN9z4mSkoG16jGuHtvDzmSH7aiFCS0kGNvdMFidY9veT8HRpsvWrYPX2CW8YPXGyBORVSkq81pvS4wBest_VCPvqohbROVFFUaEXSsHwtSapF9aJ9kbDIAMZF94_j5hNp_lWzHyP4bEPLynFcyPtg1S0AenyFLwkPgeMlKkj0KrvgbtPRJrLXQQ3dzpnpbkVzElsO_vA_q0m00__y30000)
+
+---
+
+# Đặc tả ca sử dụng: Thống kê giao dịch ngân hàng
+
+## Tên ca sử dụng: Phân tích và thống kê giao dịch ngân hàng
+
+### Tác nhân tham gia:
+- **Khách hàng**
+
+### Mô tả tóm tắt:
+Người dùng tải lên file sao kê giao dịch, hệ thống phân tích dữ liệu và cung cấp báo cáo thống kê bao gồm tổng số giao dịch, số tiền thu/chi, số dư cuối kỳ, và các chỉ số liên quan.
+
+### Tiền điều kiện:
+- Người dùng đã đăng nhập vào hệ thống.
+- File sao kê giao dịch phải có định dạng hợp lệ (CSV, Excel, v.v.).
+
+### Luồng sự kiện chính:
+1. Người dùng chọn chức năng "Tải lên file giao dịch".
+2. Hệ thống hiển thị giao diện để người dùng chọn file từ thiết bị.
+3. Người dùng tải file lên.
+4. Hệ thống kiểm tra định dạng file:
+   - Nếu hợp lệ, chuyển sang bước 5.
+   - Nếu không, hiển thị thông báo lỗi và yêu cầu tải lại.
+5. Hệ thống phân tích dữ liệu và hiển thị kết quả thống kê (tổng số giao dịch, tổng số tiền thu/chi, số dư cuối kỳ).
+6. Người dùng chọn chức năng "Lưu kết quả".
+7. Hệ thống lưu file kết quả vào thiết bị lưu trữ của người dùng.
+
+### Luồng sự kiện phụ:
+- **Khi file bị lỗi**: Hệ thống thông báo lỗi, yêu cầu người dùng tải lại file đúng định dạng.
+- **Khi phân tích thất bại**: Hệ thống thông báo lỗi kỹ thuật và khuyến nghị thử lại sau.
+
+### Hậu điều kiện:
+- Kết quả thống kê được hiển thị và/hoặc lưu trữ thành công.
+
+### Các ngoại lệ:
+- Lỗi kết nối mạng khi tải file.
+- File quá lớn không thể xử lý.
+- Lỗi phân tích do dữ liệu trong file không hợp lệ.
+
+
+
