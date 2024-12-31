@@ -61,5 +61,9 @@ Người dùng tải lên file sao kê giao dịch, hệ thống phân tích d�
 - File quá lớn không thể xử lý.
 - Lỗi phân tích do dữ liệu trong file không hợp lệ.
 
+---
+# Yêu cầu phi chức năng
+
+- Hệ thống phải có khả năng xử lý phân tích một tệp sao kê ngân hàng có kích thước 100MB trong thời gian không quá 5 phút.
 
 
